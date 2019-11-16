@@ -17,7 +17,7 @@ public class JavaFuturePoolDemo {
         return Thread.currentThread().getName();
     }
 
-    static class HotWarterJob implements Callable<Boolean> //①
+    static class HotWaterJob implements Callable<Boolean> //①
     {
 
         @Override
@@ -70,7 +70,7 @@ public class JavaFuturePoolDemo {
 
     public static void main(String args[]) {
 
-        Callable<Boolean> hJob = new HotWarterJob();//异步逻辑
+        Callable<Boolean> hJob = new HotWaterJob();//异步逻辑
 
         Callable<Boolean> wJob = new WashJob();//异步逻辑
 
@@ -87,7 +87,7 @@ public class JavaFuturePoolDemo {
 
         try {
 
-            boolean warterOk = hTask.get();
+            boolean waterOk = hTask.get();
             boolean cupOk = wTask.get();
 
 //            hThread.join();
@@ -95,9 +95,9 @@ public class JavaFuturePoolDemo {
 
 
             Thread.currentThread().setName("主线程");
-            if (warterOk && cupOk) {
+            if (waterOk && cupOk) {
                 Print.tcfo("泡茶喝");
-            } else if (!warterOk) {
+            } else if (!waterOk) {
                 Print.tcfo("烧水失败，没有茶喝了");
             } else if (!cupOk) {
                 Print.tcfo("杯子洗不了，没有茶喝了");

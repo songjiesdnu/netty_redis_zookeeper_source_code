@@ -16,10 +16,10 @@ public class JoinDemo {
         return Thread.currentThread().getName();
     }
 
-    static class HotWarterThread extends Thread {
+    static class HotWaterThread extends Thread {
 
 
-        public HotWarterThread() {
+        public HotWaterThread() {
             super("** 烧水-Thread");
         }
 
@@ -70,7 +70,7 @@ public class JoinDemo {
 
     public static void main(String args[]) {
 
-        Thread hThread = new HotWarterThread();
+        Thread hThread = new HotWaterThread();
         Thread wThread = new WashThread();
 
         hThread.start();

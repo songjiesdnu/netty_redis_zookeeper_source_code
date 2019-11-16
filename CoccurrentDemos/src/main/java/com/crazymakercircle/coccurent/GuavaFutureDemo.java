@@ -20,7 +20,7 @@ public class GuavaFutureDemo {
         return Thread.currentThread().getName();
     }
 
-    static class HotWarterJob implements Callable<Boolean> //①
+    static class HotWaterJob implements Callable<Boolean> //①
     {
 
         @Override
@@ -73,7 +73,7 @@ public class GuavaFutureDemo {
     //泡茶线程
     static class MainJob implements Runnable {
 
-        boolean warterOk = false;
+        boolean waterOk = false;
         boolean cupOk = false;
         int gap = SLEEP_GAP / 10;
 
@@ -87,8 +87,8 @@ public class GuavaFutureDemo {
                     Logger.info(getCurThreadName() + "发生异常被中断.");
                 }
 
-                if (warterOk && cupOk) {
-                    drinkTea(warterOk, cupOk);
+                if (waterOk && cupOk) {
+                    drinkTea(waterOk, cupOk);
                 }
             }
         }
@@ -97,7 +97,7 @@ public class GuavaFutureDemo {
         public void drinkTea(Boolean wOk, Boolean cOK) {
             if (wOk && cOK) {
                 Logger.info("泡茶喝，茶喝完");
-                this.warterOk = false;
+                this.waterOk = false;
                 this.gap = SLEEP_GAP * 100;
             } else if (!wOk) {
                 Logger.info("烧水失败，没有茶喝了");
@@ -117,7 +117,7 @@ public class GuavaFutureDemo {
         mainThread.start();
 
         //烧水的业务逻辑
-        Callable<Boolean> hotJob = new HotWarterJob();
+        Callable<Boolean> hotJob = new HotWaterJob();
         //清洗的业务逻辑
         Callable<Boolean> washJob = new WashJob();
 
@@ -135,7 +135,7 @@ public class GuavaFutureDemo {
         Futures.addCallback(hotFuture, new FutureCallback<Boolean>() {
             public void onSuccess(Boolean r) {
                 if (r) {
-                    mainJob.warterOk = true;
+                    mainJob.waterOk = true;
                 }
             }
 

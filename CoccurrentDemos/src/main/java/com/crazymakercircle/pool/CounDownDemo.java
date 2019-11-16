@@ -21,7 +21,7 @@ public class CounDownDemo {
         return Thread.currentThread().getName();
     }
 
-    static class HotWarterJob implements Callable<Boolean> //①
+    static class HotWaterJob implements Callable<Boolean> //①
     {
 
         @Override
@@ -74,7 +74,7 @@ public class CounDownDemo {
 
     public static void main(String args[]) {
 
-        Callable<Boolean> hJob = new HotWarterJob();//③
+        Callable<Boolean> hJob = new HotWaterJob();//③
 
         Callable<Boolean> wJob = new WashJob();//③
 

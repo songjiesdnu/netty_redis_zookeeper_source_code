@@ -20,7 +20,7 @@ public class JavaFutureDemo {
         return Thread.currentThread().getName();
     }
 
-    static class HotWarterJob implements Callable<Boolean> //①
+    static class HotWaterJob implements Callable<Boolean> //①
     {
 
         @Override
@@ -65,10 +65,10 @@ public class JavaFutureDemo {
         }
     }
 
-    public static void drinkTea(boolean warterOk, boolean cupOk) {
-        if (warterOk && cupOk) {
+    public static void drinkTea(boolean waterOk, boolean cupOk) {
+        if (waterOk && cupOk) {
             Logger.info("泡茶喝");
-        } else if (!warterOk) {
+        } else if (!waterOk) {
             Logger.info("烧水失败，没有茶喝了");
         } else if (!cupOk) {
             Logger.info("杯子洗不了，没有茶喝了");
@@ -77,7 +77,7 @@ public class JavaFutureDemo {
     }
 
     public static void main(String args[]) {
-        Callable<Boolean> hJob = new HotWarterJob();//③
+        Callable<Boolean> hJob = new HotWaterJob();//③
         FutureTask<Boolean> hTask =
                 new FutureTask<>(hJob);//④
         Thread hThread = new Thread(hTask, "** 烧水-Thread");//⑤
@@ -92,12 +92,12 @@ public class JavaFutureDemo {
 
         try {
 
-            boolean  warterOk = hTask.get();
+            boolean  waterOk = hTask.get();
             boolean  cupOk = wTask.get();
 
 //            hThread.join();
 //            wThread.join();
-            drinkTea(warterOk, cupOk);
+            drinkTea(waterOk, cupOk);
 
 
         } catch (InterruptedException e) {
