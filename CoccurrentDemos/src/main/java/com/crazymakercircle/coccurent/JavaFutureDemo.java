@@ -80,14 +80,14 @@ public class JavaFutureDemo {
         Callable<Boolean> hJob = new HotWaterJob();//③
         FutureTask<Boolean> hTask =
                 new FutureTask<>(hJob);//④
-        Thread hThread = new Thread(hTask, "** 烧水-Thread");//⑤
+        Thread hotThread = new Thread(hTask, "** 烧水-Thread");//⑤
 
         Callable<Boolean> wJob = new WashJob();//③
         FutureTask<Boolean> wTask =
                 new FutureTask<>(wJob);//④
-        Thread wThread = new Thread(wTask, "$$ 清洗-Thread");//⑤
-        hThread.start();
-        wThread.start();
+        Thread washThread = new Thread(wTask, "$$ 清洗-Thread");//⑤
+        hotThread.start();
+        washThread.start();
         Thread.currentThread().setName("主线程");
 
         try {
@@ -96,7 +96,7 @@ public class JavaFutureDemo {
             boolean  cupOk = wTask.get();
 
 //            hThread.join();
-//            wThread.join();
+//            washThread.join();
             drinkTea(waterOk, cupOk);
 
 

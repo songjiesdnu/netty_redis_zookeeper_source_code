@@ -7,6 +7,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by 尼恩 at 疯狂创客圈
@@ -125,7 +126,8 @@ public class CounDownDemo {
 
         try {
             synchronized (countDownLatch) {
-                countDownLatch.wait(5000);
+                countDownLatch.await(5000, TimeUnit.MICROSECONDS);
+
             }
             Thread.currentThread().setName("主线程");
 

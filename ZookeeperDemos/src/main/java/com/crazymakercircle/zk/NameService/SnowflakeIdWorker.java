@@ -2,6 +2,7 @@ package com.crazymakercircle.zk.NameService;
 
 import com.crazymakercircle.util.JsonUtil;
 import com.crazymakercircle.zk.ZKclient;
+import com.google.gson.annotations.Expose;
 import lombok.Data;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.zookeeper.CreateMode;
@@ -13,7 +14,7 @@ import org.apache.zookeeper.CreateMode;
 public class SnowflakeIdWorker {
 
     //Zk客户端
-    private CuratorFramework client = null;
+    transient  private CuratorFramework zkClient = null;
 
     //工作节点的路径
     private String pathPrefix = "/test/IDMaker/worker-";
@@ -23,8 +24,8 @@ public class SnowflakeIdWorker {
 
 
     private SnowflakeIdWorker() {
-        instance.client = ZKclient.instance.getClient();
-        instance.init();
+        this.zkClient = ZKclient.instance.getClient();
+        this.init();
     }
 
 
@@ -35,9 +36,9 @@ public class SnowflakeIdWorker {
         // 节点的 payload 为当前worker 实例
 
         try {
-            byte[] payload = JsonUtil.Object2JsonBytes(this);
+            byte[] payload = pathPrefix.getBytes();
 
-            pathRegistered = client.create()
+            pathRegistered = zkClient.create()
                     .creatingParentsIfNeeded()
                     .withMode(CreateMode.EPHEMERAL_SEQUENTIAL)
                     .forPath(pathPrefix, payload);
