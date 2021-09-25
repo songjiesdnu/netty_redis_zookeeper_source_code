@@ -72,6 +72,7 @@ class MultiThreadEchoHandler implements Runnable {
     //异步任务的内部类
     class AsyncTask implements Runnable {
         public void run() {
+            // NOTE:宋杰 内部类可以使用外部类的方法、成员变量等
             MultiThreadEchoHandler.this.asyncRun();
         }
     }
